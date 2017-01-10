@@ -26,7 +26,7 @@
       $name = $input->getArgument('name');
       $cardNumber = $input->getArgument('cardNumber');
       $is_valid = (int) $this->isLuhn10($cardNumber);
-      $limit = $input->getArgument('limit');
+      $limit = str_replace("$","",$input->getArgument('limit'));
       $this->database->query('INSERT INTO Users (`name`, `ccnum`, `limit`, `is_valid`) values(:name, :cardNumber, :limit, :is_valid)',
                               compact('name', 'cardNumber', 'limit', 'is_valid'));
    }
