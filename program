@@ -1,0 +1,13 @@
+#! /usr/bin/env php
+
+<?php
+
+use Acme\Command;
+use Acme\CreditCardApplication;
+use Acme\DatabaseAdapter;
+use Symfony\Component\Console\Application;
+require 'vendor/autoload.php';
+
+
+$app = new CreditCardApplication();
+$app->run();
