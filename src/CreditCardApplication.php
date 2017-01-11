@@ -3,17 +3,11 @@
 namespace Acme;
 
 
-use Exception;
-use PDO;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 
 class CreditCardApplication extends Application
 {
-  /**
-   * @var DatabaseConnection
-   */
-  protected $dbAdapter;
 
   public function __construct($name = 'UNKNOWN', $version = 'UNKNOWN')
   {

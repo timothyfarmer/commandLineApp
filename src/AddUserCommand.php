@@ -73,7 +73,11 @@
        if($alternate){
          $temp = $cardNumber[$i];
          $temp *= 2;
-         $cardNumber[$i] = ($temp > 9) ? $temp -= 9 : $temp;
+         if ($temp > 9) {
+           $cardNumber[$i] = $temp -= 9;
+         } else {
+           $cardNumber[$i] = $temp;
+         }
        }
        $sum += $cardNumber[$i];
        $alternate = !$alternate;
