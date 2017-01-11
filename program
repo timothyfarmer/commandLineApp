@@ -4,10 +4,11 @@
 
 use Acme\Command;
 use Acme\CreditCardApplication;
-use Acme\DatabaseAdapter;
+use Acme\DatabaseConnection;
 use Symfony\Component\Console\Application;
 require 'vendor/autoload.php';
 
-
+//This will be a one command application that will run all
+//sub-commands based on input from a file.
 $app = new CreditCardApplication();
 $app->run();

@@ -1,5 +1,5 @@
 <?php namespace Acme;
-use Acme\DatabaseAdapter;
+use Acme\DatabaseConnection;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,11 +15,9 @@ use Symfony\Component\Console\Output\OutputInterface;
  * based on the input file.
  */
 class Command extends SymfonyCommand {
-  protected $database;
 
-  public function __construct(DatabaseAdapter $database)
+  public function __construct()
   {
-    $this->database = $database;
     parent::__construct();
   }
 

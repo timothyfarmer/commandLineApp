@@ -11,35 +11,35 @@ use Symfony\Component\Console\Input\InputInterface;
 class CreditCardApplication extends Application
 {
   /**
-   * @var DatabaseAdapter
+   * @var DatabaseConnection
    */
   protected $dbAdapter;
 
   public function __construct($name = 'UNKNOWN', $version = 'UNKNOWN')
   {
-    try {
-      $pdo = new PDO('sqlite:db.sqlite');
-
-      $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (Exception $ex){
-      echo 'Cannot connect to database';
-      exit(1);
-    }
-    $dbAdapter = new DatabaseAdapter($pdo);
-    $this->dbAdapter = $dbAdapter;
     parent::__construct($name, $version);
   }
 
+  /**
+   * @param InputInterface $input
+   * @return string
+   *
+   * returns the command name
+   */
   protected function getCommandName(InputInterface $input)
   {
     return 'command';
   }
 
+  /**
+   * @return array
+   *
+   * setting up commands that will be used at runtime.
+   */
   protected function getDefaultCommands()
   {
-    $defaultCommands[] = new Command($this->dbAdapter);
-    $defaultCommands[] = new AddUserCommand($this->dbAdapter);
+    $defaultCommands[] = new Command();
+    $defaultCommands[] = new AddUserCommand();
     return $defaultCommands;
   }
 

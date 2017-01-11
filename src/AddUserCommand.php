@@ -6,11 +6,14 @@
 
  class AddUserCommand extends Command {
 
-   public function __construct(DatabaseAdapter $database)
+   public function __construct()
    {
-     parent::__construct($database);
+     parent::__construct();
    }
 
+   /**
+    * Configuration for add_user command.
+    */
    public function configure()
    {
      $this->setName('add_user')
@@ -21,17 +24,49 @@
 
    }
 
+   /**
+    * @param InputInterface $input
+    * @param OutputInterface $output
+    *
+    * Just using one table, 'Users', since this is a very small app
+    * for demonstration purposes.
+    */
    public function execute(InputInterface $input, OutputInterface $output)
    {
+      //get args
       $name = $input->getArgument('name');
       $cardNumber = $input->getArgument('cardNumber');
-      $is_valid = (int) $this->isLuhn10($cardNumber);
       $limit = str_replace("$","",$input->getArgument('limit'));
-      $this->database->query('INSERT INTO Users (`name`, `ccnum`, `limit`, `is_valid`) values(:name, :cardNumber, :limit, :is_valid)',
-                              compact('name', 'cardNumber', 'limit', 'is_valid'));
+
+      //store user in datasource
+      $this->storeUser($name, $cardNumber, $limit);
    }
 
-   public function isLuhn10($cardNumber){
+   /**
+    * @param $name
+    * @param $cardNumber
+    * @param $limit
+    * @param $is_valid
+    *
+    * Store user in datasource
+    */
+   private function storeUser($name, $cardNumber, $limit){
+
+     //check if valid card
+     $is_valid = (int) $this->isLuhn10($cardNumber);
+     //store user
+     DatabaseConnection::get()->query('INSERT INTO Users (`name`, `ccnum`, `limit`, `is_valid`) values(:name, :cardNumber, :limit, :is_valid)',
+       compact('name', 'cardNumber', 'limit', 'is_valid'));
+   }
+
+   /**
+    * @param $cardNumber
+    * @return bool
+    *
+    * Validate credit card numbers using Luhn's mod 10 algorithm
+    * returns true if valid false if not valid
+    */
+   private function isLuhn10($cardNumber){
      $sum = 0;
      $alternate = false;
      for($i = strlen($cardNumber) - 1; $i >= 0; $i--){
@@ -45,4 +80,5 @@
      }
      return $sum %10 == 0;
    }
+
  }
