@@ -42,11 +42,17 @@ class Command extends SymfonyCommand {
         switch ($command) {
           case "Add":
             $this->callAddUserCommand($line, $output);
+            break;
+          case "Credit":
+            $this->callCreditCommand($line, $output);
+            break;
         }
       }
     } catch (Exception $e){
       $output->writeln($e->getMessage());
     }
+    //getting rid of data because this program isn't something to reuse
+    DatabaseConnection::get()->truncate();
     //return $output->writeln("file name is " . $file_name);
   }
 
@@ -59,5 +65,13 @@ class Command extends SymfonyCommand {
     );
     $addInput = new ArrayInput($arguments);
     $command->run($addInput, $output);
+  }
+
+  public function callCreditCommand($line, OutputInterface $output) {
+    $command = $this->getApplication()->find('credit');
+    $line = explode(" ", $line);
+    $arguments = array('name' => $line[1], 'amount' => $line[2]);
+    $creditInput = new ArrayInput($arguments);
+    $command->run($creditInput, $output);
   }
 }

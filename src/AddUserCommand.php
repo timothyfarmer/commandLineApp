@@ -55,7 +55,7 @@
      //check if valid card
      $is_valid = (int) $this->isLuhn10($cardNumber);
      //store user
-     DatabaseConnection::get()->query('INSERT INTO Users (`name`, `ccnum`, `limit`, `is_valid`) values(:name, :cardNumber, :limit, :is_valid)',
+     DatabaseConnection::get()->insert('INSERT INTO Users (`name`, `ccnum`, `limit`, `is_valid`) values(:name, :cardNumber, :limit, :is_valid)',
        compact('name', 'cardNumber', 'limit', 'is_valid'));
    }
 

@@ -31,15 +31,29 @@ class DatabaseConnection {
     return $database;
   }
 
-  public function query($sql, $parameters){
+  public function insert($sql, $parameters){
     return $this->connection->prepare($sql)->execute($parameters);
   }
 
   public function fetchUserByName($name){
-    return $this->query('SELECT * FROM Users WHERE NAME = ' . $name);
+    return $this->connection->query('SELECT * FROM Users WHERE NAME = ' . $name);
+  }
+
+  public function truncate(){
+    $sql = 'DELETE from Users';
+    return $this->connection->prepare($sql)->execute();
   }
 
   public function fetchAllUsers(){
-    return $this->query('SELECT * FROM Users');
+    $sql = 'SELECT * FROM Users';
+    $result = $this->connection->query($sql,PDO::FETCH_ASSOC);
+    $rows = array();
+    if($result){
+      while($row = $result->fetch(PDO::FETCH_ASSOC)){
+        $rows[] = $row;
+      }
+    }
+    var_dump($rows);
+    return $rows;
   }
 }
