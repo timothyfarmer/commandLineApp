@@ -2,10 +2,8 @@
 
 <?php
 
-use Acme\Command;
 use Acme\CreditCardApplication;
-use Acme\DatabaseConnection;
-use Symfony\Component\Console\Application;
+
 require 'vendor/autoload.php';
 
 //This will be a one command application that will run all
