@@ -108,7 +108,7 @@ The methods available are:
 | fetchAllUsers(void) | Array | void | returns fetched Users rows as array of arrays |
 
 ##Application Design
-The main point of entry is in the *program file which requires our dependencies in the vendor directory and "new ups" the [CreditCardApplication](src/CreditCardApplication.php)
+The main point of entry is in the program* file which requires our dependencies in the vendor directory and "new ups" the [CreditCardApplication](src/CreditCardApplication.php)
 
 [CreditCardApplication](src/CreditCardApplication.php) just sets the default commands that will be used via the input.txt file and runs the top command which I simply named [Command](src/Command.php).
 
