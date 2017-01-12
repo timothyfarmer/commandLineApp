@@ -115,9 +115,7 @@ The main point of entry is in the program* file which requires our dependencies 
 
 [CreditCardApplication](src/CreditCardApplication.php) just sets the default commands that will be used via the input.txt file and runs the top command which I simply named [Command](src/Command.php).
 
-[Command](src/Command.php) reads the input.txt file and runs the sub-commands in the order that input.txt presents them. Each sub-command persists data using the [DatabaseConnection](src/DatabaseConnection.php) 
-
-**Chain of Responsibility Pattern** is used in [CreditUserCommand](src/CreditUserCommand.php) and [ChargeUserCommand](ChargeUserCommand.php). Since neither [CreditUserCommand](src/CreditUserCommand.php) nor [ChargeUserCommand](ChargeUserCommand.php) can handle the method call ```$this->changeUserBalance()``` and also ```$this->getName()``` these method calls get moved up the object "chain" until they find an object that can handle the request which will be my implementation of [Command](Command.php) and Symfony's implementation of ``Symfony\Component\Console\Command\Command``` respectfully. 
+[Command](src/Command.php) reads the input.txt file and runs the sub-commands in the order that input.txt presents them. Each sub-command persists data using the [DatabaseConnection](src/DatabaseConnection.php)  
 
 **Singleton Pattern** is used on the [DatabaseConnection](src/DatabaseConnection.php) that gives us a static (one and only one instance) 
 object so that we can interact with our database without having to open and close connections all the time.
