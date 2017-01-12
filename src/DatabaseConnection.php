@@ -48,9 +48,6 @@ class DatabaseConnection {
 
   public function updateBalanceForUser($user){
     $result = $this->connection->query('UPDATE Users SET Balance="' . $user['Balance'] . '" WHERE Users.id = "' . $user['id'] . '"');
-    if($result){
-      $result = $this->fetchUserByName($user['Name']);
-    }
     return $result;
   }
 
