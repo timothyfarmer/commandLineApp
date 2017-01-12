@@ -105,7 +105,7 @@ The methods available are:
 | fetchUserByName($name) | Array | **$name:** (string) | gets a user from the database from their Name |
 | updateBalanceForUser($user) | Boolean | **$user:** (array) | sets the Balance for the user |
 | truncate(void) | Boolean | void | deletes all users from the database |
-| fetchAllUsers | Array | void | returns fetched Users rows as array of arrays |
+| fetchAllUsers(void) | Array | void | returns fetched Users rows as array of arrays |
 
 ##Application Design
 The main point of entry is in the *program file which requires our dependencies in the vendor directory and "new ups" the [CreditCardApplication](src/CreditCardApplication.php)
