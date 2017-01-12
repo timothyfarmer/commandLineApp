@@ -8,7 +8,6 @@ against them, and display balance.
  
 - Program must accept input from two sources: a filename passed in
   command line arguments and STDIN. For example, on Linux or OSX both
-  './program input.txt' and './program < input.txt' should work.
 - Program should accept four input commands passed with space delimited
   arguments.
  
@@ -68,7 +67,7 @@ Terry: $1300
 ```
 ##Installation
 You should have composer installed along with php. You can read about [Composer here](https://getcomposer.org/doc/00-intro.md)
-Also, you can read about Symfony 2.8 system requirements [here](http://symfony.com/doc/2.8/reference/requirements.html). Make sure to enable sqlite. Windows: ```extension=php_pdo_sqlite.dll``` *nix: ```extension=php_pdo_sqlite.so``` You can read more about it [here](http://php.net/manual/en/pdo.installation.php) To install this small project just clone this github repo by running ```https://github.com/timothyfarmer/commandLineApp.git commandLineApp``` into your favorite dev folder and then run: ```composer install```
+Also, you can read about Symfony 2.8 system requirements [here](http://symfony.com/doc/2.8/reference/requirements.html). Make sure to enable sqlite. Windows: ```extension=php_pdo_sqlite.dll``` *nix: ```extension=php_pdo_sqlite.so``` You can read more about it [here].(http://php.net/manual/en/pdo.installation.php) To install this small project just clone this github repo by running ```https://github.com/timothyfarmer/commandLineApp.git commandLineApp``` into your favorite dev folder and then run: ```composer install```
 
 You can then run the program by piping your input file via standard input  ```./program < input.txt``` or by passing the file name ```./program input.txt```
 
