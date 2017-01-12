@@ -1,11 +1,12 @@
 <?php namespace Acme;
 
+use Exception;
 use PDO;
 
 /**
  * Class DatabaseConnection
  * @package Acme
- * Simple DB adapter to run basic queries that we need
+ * Simple DB singleton to run basic queries that we need.
  */
 class DatabaseConnection {
   protected $connection;
@@ -31,17 +32,36 @@ class DatabaseConnection {
     return $database;
   }
 
-  public function insert($sql, $parameters){
+  public function addUser($parameters){
+    $sql = 'INSERT INTO Users (`name`, `ccnum`, `limit`, `is_valid`) values(:name, :cardNumber, :limit, :is_valid)';
     return $this->connection->prepare($sql)->execute($parameters);
   }
 
   public function fetchUserByName($name){
-    return $this->connection->query('SELECT * FROM Users WHERE NAME = ' . $name);
+    $row = null;
+    $result = $this->connection->query('SELECT * FROM Users WHERE Users.Name = "' . $name . '"', PDO::FETCH_ASSOC);
+    if($result){
+      $row = $result->fetch(PDO::FETCH_ASSOC);
+    }
+    return $row;
+  }
+
+  public function updateBalanceForUser($user){
+    $result = $this->connection->query('UPDATE Users SET Balance="' . $user['Balance'] . '" WHERE Users.id = "' . $user['id'] . '"');
+    if($result){
+      $result = $this->fetchUserByName($user['Name']);
+    }
+    return $result;
   }
 
   public function truncate(){
     $sql = 'DELETE from Users';
     return $this->connection->prepare($sql)->execute();
+  }
+
+  public function removeUserByName($name){
+    $result = $this->connection->query('DELETE FROM Users WHERE Users.Name = "' . $name . '"');
+    return $result;
   }
 
   public function fetchAllUsers(){
@@ -53,7 +73,6 @@ class DatabaseConnection {
         $rows[] = $row;
       }
     }
-    var_dump($rows);
     return $rows;
   }
 }

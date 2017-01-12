@@ -1,5 +1,4 @@
 <?php namespace Acme;
- use Acme\Command;
  use Symfony\Component\Console\Input\InputArgument;
  use Symfony\Component\Console\Input\InputInterface;
  use Symfony\Component\Console\Output\OutputInterface;
@@ -53,10 +52,9 @@
    private function storeUser($name, $cardNumber, $limit){
 
      //check if valid card
-     $is_valid = (int) $this->isLuhn10($cardNumber);
+     $is_valid = (int) $this->isValidCreditCard($cardNumber);
      //store user
-     DatabaseConnection::get()->insert('INSERT INTO Users (`name`, `ccnum`, `limit`, `is_valid`) values(:name, :cardNumber, :limit, :is_valid)',
-       compact('name', 'cardNumber', 'limit', 'is_valid'));
+     DatabaseConnection::get()->addUser(compact('name', 'cardNumber', 'limit', 'is_valid'));
    }
 
    /**
@@ -66,7 +64,7 @@
     * Validate credit card numbers using Luhn's mod 10 algorithm
     * returns true if valid false if not valid
     */
-   private function isLuhn10($cardNumber){
+   private function isValidCreditCard($cardNumber){
      $sum = 0;
      $alternate = false;
      for($i = strlen($cardNumber) - 1; $i >= 0; $i--){
@@ -74,7 +72,8 @@
          $temp = $cardNumber[$i];
          $temp *= 2;
          if ($temp > 9) {
-           $cardNumber[$i] = $temp -= 9;
+           $temp -= 9;
+           $cardNumber[$i] = $temp;
          } else {
            $cardNumber[$i] = $temp;
          }

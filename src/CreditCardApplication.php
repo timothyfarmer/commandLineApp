@@ -34,7 +34,9 @@ class CreditCardApplication extends Application
   {
     $defaultCommands[] = new Command();
     $defaultCommands[] = new AddUserCommand();
-    $defaultCommands[] = new CreditCommand();
+    $defaultCommands[] = new CreditUserCommand();
+    $defaultCommands[] = new RemoveUserCommand();
+    $defaultCommands[] = new ChargeUserCommand();
     return $defaultCommands;
   }
 
