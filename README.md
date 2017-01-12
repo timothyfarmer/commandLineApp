@@ -97,7 +97,7 @@ I decided not to use a separate table for credit cards just to keep it simple fo
 
 The [DatabaseConnection](src/DatabaseConnection.php) class is a simple use of the sqlite PDO (PHP Data Objects) class to access our sqlite
 database which I have implemented as a singleton that provides a static get() method to quickly return the connection
-to run methods against.
+to run queries against.
 The methods available are:
 
 | Method Name | Return Type | Arguments | Functionality |
