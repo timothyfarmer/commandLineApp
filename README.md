@@ -108,7 +108,7 @@ The methods available are:
 | fetchAllUsers(void) | Array | void | returns fetched Users rows as array of arrays |
 
 ##Application Design
-I picked PHP for this project because it is my language of choice that I use on a daily basis and also because it provides (via composer) very easy dependency management and installation between developers. 
+I picked PHP for this project because it is my language of choice that I use on a daily basis and also because it provides (via composer) very easy dependency management and installation between developers, also because of the ease of use of Symfony Console which is very handy in a lot of the cutting-edge PHP frameworks out there such as Symfony and Laravel. Learning to use Symfony Console will benefit you greatly and if you don't believe me, check out [Laravel Artisan](https://laravel.com/docs/5.3/artisan) which leverages a little of Symfony Console. I'm using a back-dated (2.8) version of Symfony here because I've used it a little before and already had it on my machine (in case you were wondering).
 
 The main point of entry is in the program* file which requires our dependencies in the vendor directory and "new ups" the [CreditCardApplication](src/CreditCardApplication.php)
 
