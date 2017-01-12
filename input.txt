@@ -1,0 +1,11 @@
+Add Terry 4111111111111111 $1500
+Add Lowell 5454545454545454 $2000
+Add Quinton 1234567890123456 $1000
+Add Anthony 5500000000000004 $5000
+Charge Terry $500
+Charge Terry $800
+Charge Lowell $10
+Credit Lowell $100
+Credit Quinton $500
+Charge Terry $1000
+Remove Anthony
