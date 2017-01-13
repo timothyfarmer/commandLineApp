@@ -78,18 +78,8 @@ class Command extends SymfonyCommand {
   private function printSummaryToConsole(OutputInterface $output){
     //fetch all users
     $users = DatabaseConnection::get()->fetchAllUsers();
-    //build new array so it is easy to sort
-    $new_users = null;
+
     foreach($users as $user){
-      $new_users[$user['Name']] = $user;
-    }
-    unset($users);
-    //sort array by name
-    usort($new_users, function($a,$b){
-      return $a['Name'] > $b['Name'];
-    });
-    //print summary
-    foreach($new_users as $user){
       if($user['is_valid']){
         $output->writeln($user['Name'] . ": $" . $user['Balance']);
       } else {

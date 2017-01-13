@@ -62,7 +62,7 @@ class DatabaseConnection {
   }
 
   public function fetchAllUsers(){
-    $sql = 'SELECT * FROM Users';
+    $sql = 'SELECT * FROM Users ORDER BY Users."Name"';
     $result = $this->connection->query($sql,PDO::FETCH_ASSOC);
     $rows = array();
     if($result){
